@@ -1,0 +1,35 @@
+First question:
+SELECT winnerid, firstname, lastname, count(winnerid)
+FROM people
+NATURAL JOIN winning
+NATURAL JOIN prizes
+GROUP BY winnerid
+ORDER BY count DESC;
+
+Second question:
+SELECT borncountry, count(borncountry)
+FROM people
+NATURAL JOIN winning
+NATURAL JOIN prizes
+GROUP BY borncountry
+ORDER BY count DESC;
+
+Third question:
+SELECT winnerid, firstname, lastname, born, prizes.category, prices.year, (year-born) as age
+FROM people
+NATURAL JOIN winning
+NATURAL JOIN prizes
+ORDER BY age ASC;
+
+Fourth question:
+SELECT overallmotivation
+FROM winning
+FULL OUTER JOIN prizes
+ON prizeid = prizeid
+WHERE winnerid IS NULL;
+
+SELECT COUNT(overallmotivation) as no_winner
+FROM winning
+FULL OUTER JOIN prizes
+ON prizeid = prizeid
+WHERE winnerid IS NULL;
